@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "602347638322",
+    "project_id": "challenge-coding",
+    "storage_bucket": "challenge-coding.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602347638322:android:20698c2db22f085c39f62b",
+        "android_client_info": {
+          "package_name": "com.example.coding_challenge_koesnadi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq2ZMXnazckGTmVeS840r4VKozDEqsiI8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
