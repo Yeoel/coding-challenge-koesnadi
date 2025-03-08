@@ -86,6 +86,12 @@ class _SignUpState extends State<SignUp> {
                       FTextField(
                         controller: nameController,
                         enabled: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Name can\'t empty';
+                          }
+                          return null;
+                        },
                         keyboardType: TextInputType.name,
                         maxLines: 1,
                         label: const Text('Name'),
@@ -95,6 +101,12 @@ class _SignUpState extends State<SignUp> {
                       FTextField(
                         controller: emailController,
                         enabled: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Email can\'t empty';
+                          }
+                          return null;
+                        },
                         keyboardType: TextInputType.emailAddress,
                         maxLines: 1,
                         label: Text('Email'),
@@ -106,6 +118,12 @@ class _SignUpState extends State<SignUp> {
                       FTextField.password(
                         controller: passwordController,
                         enabled: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Password can\'t empty';
+                          }
+                          return null;
+                        },
                         keyboardType: TextInputType.visiblePassword,
                         maxLines: 1,
                         label: Text('Password'),
@@ -117,6 +135,12 @@ class _SignUpState extends State<SignUp> {
                       FTextField.password(
                         controller: retypePasswordController,
                         enabled: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Re-type password can\'t empty';
+                          }
+                          return null;
+                        },
                         keyboardType: TextInputType.visiblePassword,
                         maxLines: 1,
                         label: Text('Re-type Password'),
