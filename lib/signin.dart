@@ -20,15 +20,15 @@ class _SignInState extends State<SignIn> {
 
   Future<void> loginUserWithEmailAndPassword() async {
     try {
+      if (!_formKey.currentState!.validate()) {
+        // If the form is invalid, stop further execution.
+        return;
+      }
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
 
-      if (!_formKey.currentState!.validate()) {
-        // If the form is invalid, stop further execution.
-        return;
-      }
 
       toastification.show(
         title: Text('Registration successful! Your account is ready.'),
