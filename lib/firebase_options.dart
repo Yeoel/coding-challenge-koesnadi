@@ -15,8 +15,6 @@ import 'package:flutter/foundation.dart'
 // / );
 /// ```
 
-
-
 class DefaultFirebaseOptions {
 
   static FirebaseOptions get currentPlatform {
@@ -46,46 +44,47 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDv235T_2YgpJhkTAjti5KSUNm-uKg_D4Q',
-    appId: '1:602347638322:web:2269a44d0a95040e39f62b',
-    messagingSenderId: '602347638322',
-    projectId: 'challenge-coding',
-    authDomain: 'challenge-coding.firebaseapp.com',
-    storageBucket: 'challenge-coding.firebasestorage.app',
+    apiKey: 'AIzaSyB8v24DM6-7gnWeJLSfAgx_dyEtj-U6Ve0',
+    appId: '1:814905777019:web:76c738eaf2d18ec0173bde',
+    messagingSenderId: '814905777019',
+    projectId: 'challenge-coding-koesnadi',
+    authDomain: 'challenge-coding-koesnadi.firebaseapp.com',
+    storageBucket: 'challenge-coding-koesnadi.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDq2ZMXnazckGTmVeS840r4VKozDEqsiI8',
-    appId: '1:602347638322:android:20698c2db22f085c39f62b',
-    messagingSenderId: '602347638322',
-    projectId: 'challenge-coding',
-    storageBucket: 'challenge-coding.firebasestorage.app',
+    apiKey: 'AIzaSyCqsVz6HsSGGqO1SABtAR26-UNJyrr7eBw',
+    appId: '1:814905777019:android:8c0165c345aadb35173bde',
+    messagingSenderId: '814905777019',
+    projectId: 'challenge-coding-koesnadi',
+    storageBucket: 'challenge-coding-koesnadi.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCxAGc91wPoT5hSaG-22jB1Ui9v7q9shMI',
-    appId: '1:602347638322:ios:936ac89c3c45b36b39f62b',
-    messagingSenderId: '602347638322',
-    projectId: 'challenge-coding',
-    storageBucket: 'challenge-coding.firebasestorage.app',
+    apiKey: 'AIzaSyBV4t1RykG7vmuiJXkbMHIYRA5JCgV027Y',
+    appId: '1:814905777019:ios:ec27482eaf0eecc5173bde',
+    messagingSenderId: '814905777019',
+    projectId: 'challenge-coding-koesnadi',
+    storageBucket: 'challenge-coding-koesnadi.firebasestorage.app',
     iosBundleId: 'com.example.codingChallengeKoesnadi',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCxAGc91wPoT5hSaG-22jB1Ui9v7q9shMI',
-    appId: '1:602347638322:ios:936ac89c3c45b36b39f62b',
-    messagingSenderId: '602347638322',
-    projectId: 'challenge-coding',
-    storageBucket: 'challenge-coding.firebasestorage.app',
+    apiKey: 'AIzaSyBV4t1RykG7vmuiJXkbMHIYRA5JCgV027Y',
+    appId: '1:814905777019:ios:ec27482eaf0eecc5173bde',
+    messagingSenderId: '814905777019',
+    projectId: 'challenge-coding-koesnadi',
+    storageBucket: 'challenge-coding-koesnadi.firebasestorage.app',
     iosBundleId: 'com.example.codingChallengeKoesnadi',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyDv235T_2YgpJhkTAjti5KSUNm-uKg_D4Q',
-    appId: '1:602347638322:web:dbd9e92b72ec3a9139f62b',
-    messagingSenderId: '602347638322',
-    projectId: 'challenge-coding',
-    authDomain: 'challenge-coding.firebaseapp.com',
-    storageBucket: 'challenge-coding.firebasestorage.app',
+    apiKey: 'AIzaSyB8v24DM6-7gnWeJLSfAgx_dyEtj-U6Ve0',
+    appId: '1:814905777019:web:17ac784ceefe161d173bde',
+    messagingSenderId: '814905777019',
+    projectId: 'challenge-coding-koesnadi',
+    authDomain: 'challenge-coding-koesnadi.firebaseapp.com',
+    storageBucket: 'challenge-coding-koesnadi.firebasestorage.app',
   );
+
 }

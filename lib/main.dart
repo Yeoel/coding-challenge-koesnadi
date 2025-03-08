@@ -1,13 +1,38 @@
-import 'package:coding_challenge_koesnadi/home.dart';
+import 'package:coding_challenge_koesnadi/signin.dart';
+import 'package:coding_challenge_koesnadi/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:forui/forui.dart';
+import 'package:toastification/toastification.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  WidgetsFlutterBinding.ensureInitialized();
+  await _initializeFirebase();
   runApp(const MyApp());
+}
+
+Future<void> _initializeFirebase() async {
+  try {
+    // Check if a Firebase app named '[DEFAULT]' already exists
+    FirebaseApp app = Firebase.app();
+    // If it doesn't exist, initialize it
+    if (app == null) {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    }
+  } on FirebaseException catch (e) {
+    if (e.code == 'no-app') {
+      // If no Firebase app exists, initialize a new one
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    } else {
+      // Re-throw other exceptions
+      rethrow;
+    }
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -16,13 +41,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return ToastificationWrapper(
+      config: ToastificationConfig(maxToastLimit: 1),
+      child: MaterialApp(
+        title: 'Flutter App',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: SignIn(),
       ),
-      home: const Home(),
     );
   }
 }
