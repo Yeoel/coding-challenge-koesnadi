@@ -24,7 +24,7 @@ class _CreateDataState extends State<CreateData> with TickerProviderStateMixin {
   void initState() {
     super.initState();
 
-    userId =currentUser!.uid;
+    userId = currentUser!.uid;
 
     deadlineController = FDatePickerController(
       vsync: this,
