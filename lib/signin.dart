@@ -29,9 +29,8 @@ class _SignInState extends State<SignIn> {
           email: emailController.text.trim(),
           password: passwordController.text.trim());
 
-
       toastification.show(
-        title: Text('Registration successful! Your account is ready.'),
+        title: Text('Sign in success'),
         autoCloseDuration: const Duration(seconds: 5),
         icon: const Icon(Icons.check),
         alignment: Alignment.bottomCenter,

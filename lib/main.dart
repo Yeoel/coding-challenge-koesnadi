@@ -1,5 +1,7 @@
+import 'package:coding_challenge_koesnadi/dashboard.dart';
 import 'package:coding_challenge_koesnadi/signin.dart';
 import 'package:coding_challenge_koesnadi/signup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:forui/forui.dart';
@@ -47,7 +49,9 @@ class MyApp extends StatelessWidget {
         title: 'Flutter App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: SignIn(),
+        home: FirebaseAuth.instance.currentUser != null
+            ? const Dashboard()
+            : const SignIn(),
       ),
     );
   }
