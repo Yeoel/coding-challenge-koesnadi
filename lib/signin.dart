@@ -40,7 +40,7 @@ class _SignInState extends State<SignIn> {
       }
     } on FirebaseAuthException catch (e) {
       toastification.show(
-        title: Text(e.message.toString()),
+        title: Text((e.code.toString()).replaceAll('-', ' ')),
         icon: const Icon(Icons.warning),
         autoCloseDuration: const Duration(seconds: 5),
         alignment: Alignment.bottomCenter,

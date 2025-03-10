@@ -10,7 +10,12 @@ import 'package:toastification/toastification.dart';
 class EditData extends StatefulWidget {
   final String id, task;
   final Timestamp deadline;
-  const EditData({required this.task, required this.deadline, required this.id, super.key});
+
+  const EditData(
+      {required this.task,
+      required this.deadline,
+      required this.id,
+      super.key});
 
   @override
   State<EditData> createState() => EditDataState();
@@ -32,8 +37,7 @@ class EditDataState extends State<EditData> with TickerProviderStateMixin {
     deadlineController = FDatePickerController(
       vsync: this,
       initialDate: widget.deadline.toDate(),
-      validator: (date) =>
-      date?.isBefore(DateTime.now()) ?? false
+      validator: (date) => date?.isBefore(DateTime.now()) ?? false
           ? 'Date must be in the future'
           : null,
     );
@@ -104,7 +108,9 @@ class EditDataState extends State<EditData> with TickerProviderStateMixin {
     return FTheme(
       data: FThemes.zinc.light,
       child: FScaffold(
-        header: FHeader(title: Text('FlutterApp')),
+        header: FHeader(
+          title: Text('FlutterApp'),
+        ),
         content: SingleChildScrollView(
           child: Form(
             key: _formKey,
@@ -112,9 +118,18 @@ class EditDataState extends State<EditData> with TickerProviderStateMixin {
               children: [
                 const SizedBox(height: 30),
                 FCard(
-                  title: const Text(
-                    'Edit task',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                  title: Row(
+                    spacing: 10,
+                    children: [
+                      GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: FIcon(FAssets.icons.arrowLeft),
+                      ),
+                      Text(
+                        'Edit task',
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                      ),
+                    ],
                   ),
                   subtitle: const Text(
                     'Change the task detail.',
@@ -145,7 +160,8 @@ class EditDataState extends State<EditData> with TickerProviderStateMixin {
                         FButton(
                           label: const Text('Update'),
                           onPress: () => updateTask(),
-                        ),const SizedBox(height: 15),
+                        ),
+                        const SizedBox(height: 15),
                         FButton(
                           label: const Text('Delete'),
                           style: FButtonStyle.destructive,

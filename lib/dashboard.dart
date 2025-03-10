@@ -103,7 +103,7 @@ class _DashboardState extends State<Dashboard>
                 style: TextStyle(fontSize: 15),
               ),
               Text(
-                currentUser!.email.toString(),
+                '${currentUser!.displayName!} - ${currentUser!.email!}',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 25),
@@ -137,6 +137,7 @@ class _DashboardState extends State<Dashboard>
                         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                           return Center(
                             child: Column(
+                              spacing: 12,
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -194,7 +195,8 @@ class _DashboardState extends State<Dashboard>
                                             id: data.id)));
                               },
                               details: Text(
-                                  deadlineDisplay.toString().split(' ')[0]),
+
+                                  deadlineDisplay.toString().split(' ')[0], style: TextStyle(color: deadlineData.toDate().isAfter(DateTime.now()) ? Colors.black54:Colors.red),),
                               title: Text('${index + 1}. ${data['todo']}'),
                             );
                           },

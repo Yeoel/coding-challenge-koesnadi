@@ -27,6 +27,7 @@ class _SignUpState extends State<SignUp> {
             .createUserWithEmailAndPassword(
                 email: emailController.text.trim(),
                 password: passwordController.text.trim());
+        userCredential.user!.updateDisplayName(nameController.text.trim());
 
         if (!_formKey.currentState!.validate()) {
           // If the form is invalid, stop further execution.
@@ -44,7 +45,7 @@ class _SignUpState extends State<SignUp> {
         }
       } on FirebaseAuthException catch (e) {
         toastification.show(
-          title: Text(e.message.toString()),
+          title: Text((e.code.toString()).replaceAll('-', ' ')),
           icon: const Icon(Icons.warning),
           autoCloseDuration: const Duration(seconds: 5),
           alignment: Alignment.bottomCenter,
