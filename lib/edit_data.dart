@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coding_challenge_koesnadi/dashboard.dart';
 import 'package:coding_challenge_koesnadi/database.dart';
 import 'package:coding_challenge_koesnadi/signup.dart';
@@ -7,7 +8,9 @@ import 'package:forui/forui.dart';
 import 'package:toastification/toastification.dart';
 
 class EditData extends StatefulWidget {
-  const EditData({super.key});
+  final String id, task;
+  final Timestamp deadline;
+  const EditData({required this.task, required this.deadline, required this.id, super.key});
 
   @override
   State<EditData> createState() => EditDataState();
@@ -28,20 +31,19 @@ class EditDataState extends State<EditData> with TickerProviderStateMixin {
 
     deadlineController = FDatePickerController(
       vsync: this,
-      initialDate: DateTime.now(),
+      initialDate: widget.deadline.toDate(),
       validator: (date) =>
       date?.isBefore(DateTime.now()) ?? false
           ? 'Date must be in the future'
           : null,
     );
+
+    todoController.text = widget.task;
   }
 
   final _formKey = GlobalKey<FormState>();
 
-
-
-
-  Future<void> createNewTask() async {
+  Future<void> updateTask() async {
     try {
       if (!_formKey.currentState!.validate()) {
         // If the form is invalid, stop further execution.
@@ -53,17 +55,16 @@ class EditDataState extends State<EditData> with TickerProviderStateMixin {
         'deadline': deadlineController.value
       };
 
-      await Database().createTask(taskMap, userId);
+      await Database().updateTask(taskMap, userId, widget.id);
 
       toastification.show(
-        title: Text('Create new task success'),
+        title: Text('Edit task success'),
         autoCloseDuration: const Duration(seconds: 5),
         icon: const Icon(Icons.check),
         alignment: Alignment.bottomCenter,
       );
       if (mounted) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Dashboard()));
+        Navigator.pop(context);
       }
     } on FirebaseAuthException catch (e) {
       toastification.show(
@@ -89,11 +90,11 @@ class EditDataState extends State<EditData> with TickerProviderStateMixin {
                 const SizedBox(height: 30),
                 FCard(
                   title: const Text(
-                    'Create new task',
+                    'Edit task',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                   subtitle: const Text(
-                    'Add a new task with a deadline.',
+                    'Change the task detail.',
                   ),
                   child: Form(
                     child: Column(
@@ -119,8 +120,8 @@ class EditDataState extends State<EditData> with TickerProviderStateMixin {
                         ),
                         const SizedBox(height: 25),
                         FButton(
-                          label: const Text('Create'),
-                          onPress: () => createNewTask(),
+                          label: const Text('Update'),
+                          onPress: () => updateTask(),
                         ),
                       ],
                     ),

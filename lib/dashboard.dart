@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coding_challenge_koesnadi/create_data.dart';
 import 'package:coding_challenge_koesnadi/database.dart';
+import 'package:coding_challenge_koesnadi/edit_data.dart';
 import 'package:coding_challenge_koesnadi/profile.dart';
 import 'package:coding_challenge_koesnadi/signin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -36,8 +37,9 @@ class _DashboardState extends State<Dashboard>
 
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
-    if(mounted){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignIn()));
+    if (mounted) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => SignIn()));
     }
   }
 
@@ -50,7 +52,6 @@ class _DashboardState extends State<Dashboard>
     controller = FPopoverController(vsync: this);
     groupController = FRadioSelectGroupController<String>();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -78,10 +79,9 @@ class _DashboardState extends State<Dashboard>
                       },
                     ),
                     FTile(
-                      prefixIcon: FIcon(FAssets.icons.logOut),
-                      title: const Text('Logout'),
-                      onPress: signOut
-                    ),
+                        prefixIcon: FIcon(FAssets.icons.logOut),
+                        title: const Text('Logout'),
+                        onPress: signOut),
                   ],
                 ),
               ],
@@ -113,7 +113,8 @@ class _DashboardState extends State<Dashboard>
                   builder: (context, futureSnapshot) {
                     if (futureSnapshot.hasError) {
                       return Center(
-                        child: Text('Something went wrong: ${futureSnapshot.error}'),
+                        child: Text(
+                            'Something went wrong: ${futureSnapshot.error}'),
                       );
                     }
                     if (!futureSnapshot.hasData) {
@@ -125,10 +126,12 @@ class _DashboardState extends State<Dashboard>
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
                           return Center(
-                            child: Text('Something went wrong: ${snapshot.error}'),
+                            child:
+                                Text('Something went wrong: ${snapshot.error}'),
                           );
                         }
-                        if (snapshot.connectionState == ConnectionState.waiting) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
                           return Center(child: CircularProgressIndicator());
                         }
                         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
@@ -142,7 +145,8 @@ class _DashboardState extends State<Dashboard>
                                   onPress: () {
                                     Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => CreateData()),
+                                      MaterialPageRoute(
+                                          builder: (context) => CreateData()),
                                     );
                                   },
                                   label: Text('Create new'),
@@ -161,7 +165,8 @@ class _DashboardState extends State<Dashboard>
                                 onPress: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => CreateData()),
+                                    MaterialPageRoute(
+                                        builder: (context) => CreateData()),
                                   );
                                 },
                                 label: Text('Create new'),
@@ -172,14 +177,24 @@ class _DashboardState extends State<Dashboard>
                           tileBuilder: (context, index) {
                             var data = snapshot.data!.docs[index];
                             Timestamp deadlineData = data['deadline'];
-                            var deadlineDisplay = DateTime.fromMicrosecondsSinceEpoch(
+                            var deadlineDisplay =
+                                DateTime.fromMicrosecondsSinceEpoch(
                               deadlineData.microsecondsSinceEpoch,
                             );
 
                             return FTile(
                               suffixIcon: FIcon(FAssets.icons.chevronRight),
-                              onPress: () {},
-                              details: Text(deadlineDisplay.toString().split(' ')[0]),
+                              onPress: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => EditData(
+                                            deadline: data['deadline'] as Timestamp,
+                                            task: data['todo'],
+                                            id: data.id)));
+                              },
+                              details: Text(
+                                  deadlineDisplay.toString().split(' ')[0]),
                               title: Text('${index + 1}. ${data['todo']}'),
                             );
                           },
@@ -189,7 +204,6 @@ class _DashboardState extends State<Dashboard>
                   },
                 ),
               ),
-
             ],
           ),
         ),

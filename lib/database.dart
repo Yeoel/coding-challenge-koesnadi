@@ -16,4 +16,13 @@ class Database {
         .collection('tasks')
         .snapshots();
   }
+
+  Future updateTask(Map<String, dynamic> data, String userId, String taskId) async {
+    return await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('tasks')
+        .doc(taskId)
+        .update(data);
+  }
 }
