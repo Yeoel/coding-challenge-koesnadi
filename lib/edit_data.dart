@@ -43,6 +43,29 @@ class EditDataState extends State<EditData> with TickerProviderStateMixin {
 
   final _formKey = GlobalKey<FormState>();
 
+  Future<void> deleteTask() async {
+    try {
+      await Database().deleteTask(userId, widget.id);
+
+      toastification.show(
+        title: Text('Task removed'),
+        autoCloseDuration: const Duration(seconds: 5),
+        icon: const Icon(Icons.check),
+        alignment: Alignment.bottomCenter,
+      );
+      if (mounted) {
+        Navigator.pop(context);
+      }
+    } on FirebaseAuthException catch (e) {
+      toastification.show(
+        title: Text(e.message.toString()),
+        icon: const Icon(Icons.warning),
+        autoCloseDuration: const Duration(seconds: 5),
+        alignment: Alignment.bottomCenter,
+      );
+    }
+  }
+
   Future<void> updateTask() async {
     try {
       if (!_formKey.currentState!.validate()) {
@@ -122,6 +145,11 @@ class EditDataState extends State<EditData> with TickerProviderStateMixin {
                         FButton(
                           label: const Text('Update'),
                           onPress: () => updateTask(),
+                        ),const SizedBox(height: 15),
+                        FButton(
+                          label: const Text('Delete'),
+                          style: FButtonStyle.destructive,
+                          onPress: () => deleteTask(),
                         ),
                       ],
                     ),

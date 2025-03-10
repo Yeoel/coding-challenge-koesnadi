@@ -25,4 +25,15 @@ class Database {
         .doc(taskId)
         .update(data);
   }
+
+  Future deleteTask(String userId, String taskId) async {
+    return await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('tasks')
+        .doc(taskId)
+        .delete();
+  }
+
+
 }
